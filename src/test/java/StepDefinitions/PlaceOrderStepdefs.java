@@ -1,5 +1,4 @@
 package StepDefinitions;
-
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +11,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-public class RegistrationStepdefs {
+public class PlaceOrderStepdefs {
+
     public static WebDriver driver;
     @Given("User go to the NopCommerce Home page")
     public void userGoToTheNopCommerceHomePage() throws InterruptedException {
@@ -34,12 +34,14 @@ public class RegistrationStepdefs {
         driver.findElement(By.xpath("//h2[@class='product-title']//a[contains(text(),'Nokia Lumia 1020')]")).click();
     }
     @And("User set the quantity number {int} in the quantity field")
-    public void userSetTheQuantityNumberInTheQuantityField(int arg0) {
+    public void userSetTheQuantityNumberInTheQuantityField(int arg0) throws InterruptedException {
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//input[@id='product_enteredQuantity_20']")).clear();
         driver.findElement(By.xpath("//input[@id='product_enteredQuantity_20']")).sendKeys("2");
     }
     @And("User click on the {string} button")
-    public void userClickOnTheButton(String arg0) {
+    public void userClickOnTheButton(String arg0) throws InterruptedException {
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//button[@id='add-to-cart-button-20']")).click();
     }
     @And("User go to the shipping cart page")
@@ -47,12 +49,14 @@ public class RegistrationStepdefs {
         driver.findElement(By.xpath("//span[@class='cart-label']")).click();
     }
     @And("User accept terms conditions and click checkout button")
-    public void userAcceptTermsConditionsAndClickCheckoutButton() {
+    public void userAcceptTermsConditionsAndClickCheckoutButton() throws InterruptedException {
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//input[@id='termsofservice']")).click();
         driver.findElement(By.xpath("//button[@id='checkout']")).click();
     }
     @And("User click checkout as guest button")
-    public void userClickCheckoutAsGuestButton() {
+    public void userClickCheckoutAsGuestButton() throws InterruptedException {
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//button[normalize-space()='Checkout as Guest']")).click();
     }
     @And("User input all the billing details and click continue")
@@ -106,7 +110,7 @@ public class RegistrationStepdefs {
     @Then("Verify that the order place message {string} is d")
     public void verifyThatTheOrderPlaceMessageIsD(String expectedMessage) throws InterruptedException {
         Thread.sleep(2000);
-        String actualMessage=driver.findElement(By.xpath("//strong[normalize-space()='Your order has been successfully processed!']")).getText();
+        String actualMessage=driver.findElement(By.xpath("/html/body/div[6]/div[3]/div/div/div/div[2]/div/div[1]/strong")).getText();
         Assert.assertEquals(actualMessage,expectedMessage);
         Thread.sleep(2000);
         driver.close();
