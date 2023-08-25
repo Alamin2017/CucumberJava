@@ -4,21 +4,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
+import static StepDefinitions.Hooks.driver;
 public class PlaceOrderStepdefs {
-
-    public static WebDriver driver;
     @Given("User go to the NopCommerce Home page")
     public void userGoToTheNopCommerceHomePage() throws InterruptedException {
-        driver=new ChromeDriver();
         driver.get("https://demo.nopcommerce.com/");
-        driver.manage().window().maximize();
         Thread.sleep(1000);
     }
     @When("User click {string} option from {string} category")
@@ -113,6 +107,5 @@ public class PlaceOrderStepdefs {
         String actualMessage=driver.findElement(By.xpath("/html/body/div[6]/div[3]/div/div/div/div[2]/div/div[1]/strong")).getText();
         Assert.assertEquals(actualMessage,expectedMessage);
         Thread.sleep(2000);
-        driver.close();
     }
 }
